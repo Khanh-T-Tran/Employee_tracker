@@ -62,3 +62,15 @@ const promptUser = () => {
             };
         });
 };
+
+function showDepartments() {
+    connection.query(`SELECT * FROM department`, function (err, results) {
+        if (err) {
+            console.log(err);
+        }
+        console.table(results);
+        startApp();
+    })
+
+}
+
