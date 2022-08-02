@@ -58,7 +58,23 @@ const promptUser = () => {
 
             if (choices === "View all employees") {
                 showEmployees();
-              }
+            }
+
+            if (choices === "Add a department") {
+                addDepartment();
+            }
+
+            if (choices === "Add a role") {
+                addRole();
+            }
+        
+            if (choices === "Add an employee") {
+                addEmployee();
+            }
+        
+            if (choices === "Update an employee role") {
+                updateEmployee();
+            }
 
             if (choices === "No Action") {
                 connection.end()
