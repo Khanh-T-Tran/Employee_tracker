@@ -46,6 +46,8 @@ const promptUser = () => {
                 'Add a role',
                 'Add an employee',
                 'Update an employee role',
+                'Delete an employee',
+                'Exit app'
             ]
         }
     ])
@@ -77,12 +79,16 @@ const promptUser = () => {
             }
 
             if (choices === "Update an employee role") {
-                updateEmployee();
+                updateRole ();
             }
 
-            if (choices === "No Action") {
-                connection.end()
-            };
+            if (choices === "Delete an employee") {
+                deleteEmployee();
+            }
+
+            if (choices === "Exit app") {
+                exitApp();
+            }
         });
 };
 
@@ -195,5 +201,76 @@ function addRole() {
     })
 };
 
+// function to add employee to the database
+function addEmployee() {
+    connection.query('SELECT * FROM role', function (err, res) {
+        if (err) throw err;
+        inquirer
+            .prompt([
+                {
+                    name: 'first_name',
+                    type: 'input', 
+                    message: "What is the employee's fist name? ",
+                },
+                {
+                    name: 'last_name',
+                    type: 'input', 
+                    message: "What is the employee's last name? "
+                },
+                {
+                    name: 'manager_id',
+                    type: 'input', 
+                    message: "What is the employee's manager's ID? "
+                },
+                {
+                    name: 'role', 
+                    type: 'list',
+                    choices: function() {
+                    var roleArray = [];
+                    for (let i = 0; i < res.length; i++) {
+                        roleArray.push(res[i].title);
+                    }
+                    return roleArray;
+                    },
+                    message: "What is this employee's role? "
+                }
+                ]).then(function (answer) {
+                    console.log(answer);
+                    let role_id;
+                    for (let a = 0; a < res.length; a++) {
+                        if (res[a].title == answer.role) {
+                            role_id = res[a].id;
+                            console.log(role_id)
+                        }                  
+                    }  
+                    connection.query(
+                    'INSERT INTO employee SET ?',
+                    {
+                        first_name: answer.first_name,
+                        last_name: answer.last_name,
+                        manager_id: answer.manager_id,
+                        role_id: role_id,
+                    },
+                    function (err) {
+                        if (err) throw err;
+                        console.log('Your employee has been added!');
+                        promptUser();
+                    })
+                })
+        })
+};
 
+// update a role in the database
+function updateRole () {
+      
+};
 
+//  delete an employee
+function deleteEmployee() {
+
+};
+
+// exit the app
+function exitApp() {
+    connection.end();
+};
