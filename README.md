@@ -41,14 +41,18 @@
     Run ```source schema.sql``` then ```source seeds.sql``` to seed database
     Go back to Employee_tracker foler in terminal and run ```node index.js```   
 
-## Questions
-    
-
+## Questions   
 Find me on GitHub: [Khanh-T-Tran](https://github.com/Khanh-T-Tran)<br />
 
 Any question related to the project, feel free to contact:<br />
   - [khanhtuantran@outlook.com](mailto:khanhtuantran@gmail.com)
   - [My github](https://github.com/Khanh-T-Tran)
+
+## Resource
+    Mysql2: https://www.npmjs.com/package/mysql2
+    Console table package: https://www.npmjs.com/package/console.table
+    Inquirer package: https://www.npmjs.com/package/inquirer/v/8.2.4
+    
 
 ## Contribution
   Please contact creator through Github.<br>
